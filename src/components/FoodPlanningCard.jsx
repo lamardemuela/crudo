@@ -1,11 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import { Link } from "react-router-dom";
 
 function FoodPlanningCard(props) {
   // destructuring
-  const { title, description, image } = props.eachFoodPlanning;
+  const { id, title, description, image } = props.eachFoodPlanning;
 
   return (
     // <div style={containerCardStyles}>
@@ -14,7 +13,9 @@ function FoodPlanningCard(props) {
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>{description}</Card.Text>
+          <Link to={`/food-planning-details/${id}`}>
           <Button variant="primary">Details</Button>
+          </Link>
         </Card.Body>
       </Card>
   );
