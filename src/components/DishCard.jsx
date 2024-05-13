@@ -1,8 +1,11 @@
-import React from 'react'
+
 
 function DishCard() {
+  
   return (
-    <div>DishCard</div>
+    <div>
+      DETALLES PLATO
+    </div>
   )
 }
 
