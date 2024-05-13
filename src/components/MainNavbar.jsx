@@ -17,20 +17,18 @@ function MainNavbar() {
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className="flex-{grow|shrink}-0">
           <Nav className="me-auto">
-            <div style={{width:"100%"}} className="d-flex justify-content-lg-end">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
-              <Nav.Link href="/about">Food Plannings</Nav.Link>
-              <Nav.Link href="/about">Dishes</Nav.Link>
+              <Nav.Link href="/food-planning-list">Food Plannings</Nav.Link>
+              <Nav.Link href="/dishes-list">Dishes</Nav.Link>
               <NavDropdown title="Add a planning or dish" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/ad-food-planning">
                   Add Food Planning
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/add-dish">Add Dish</NavDropdown.Item>
               </NavDropdown>
-            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

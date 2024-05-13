@@ -7,10 +7,9 @@ function DishDetails() {
 
   useEffect(()=>{
     //peticion a json-server
-    //axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
-    axios.get(`http://localhost:5005/dishes/${params.dishId}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
     .then((response)=>{
-      console.log(response.data)
+      //console.log(response.data)
     })
     .catch((error)=>{
       console.log(error)
