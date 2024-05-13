@@ -5,7 +5,7 @@ import FoodPlanningCard from "../components/FoodPlanningCard";
 import Spinner from "react-bootstrap/Spinner";
 
 function FoodPlanning() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const [foodPlanningsArr, setFoodPlannings] = useState(null);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ function FoodPlanning() {
       })
       .catch((error) => {
         console.log(error);
+        navigate('/error')
       });
   }, []);
 

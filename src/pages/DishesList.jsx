@@ -3,8 +3,10 @@ import SearchDish from '../components/SearchDish'
 import axios from 'axios'
 import { Spinner } from 'react-bootstrap/esm'
 import DishCard from '../components/DishCard'
+import { useNavigate } from 'react-router-dom'
 
 function DishesList() {
+  const navigate = useNavigate()
   const [dishes, setDishes] = useState([])
 
   useEffect(()=>{
@@ -18,7 +20,7 @@ function DishesList() {
      })
      .catch((error)=>{
       //console.log(error)
-      //navigate('/error')
+      navigate('/error')
      })
   }
   if(dishes === null){
