@@ -6,10 +6,7 @@ import logo from "../assets/images/logo-crudo.png";
 
 function Footer() {
   return (
-    <Navbar  className="bg-body-tertiary footer" bg="dark" data-bs-theme="dark">
-      <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
@@ -26,9 +23,6 @@ function Footer() {
               <NavDropdown.Item href="https://github.com/lamardemuela/crudo" target="_blank">Frontend Repository</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
   )
 }
 
