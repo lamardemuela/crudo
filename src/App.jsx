@@ -11,16 +11,16 @@ import AddDish from './pages/AddDish';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import Error from './pages/Error';
-import { Navbar } from 'react-bootstrap';
 import Footer from './components/Footer';
 import FoodPlanningDetails from './pages/FoodPlanningDetails';
 import DishDetails from './pages/DishDetails';
+import MainNavbar from './components/MainNavbar';
 
 function App() {
 
   return (
     <>
-    <Navbar />
+    <MainNavbar />
 
     <Routes>
       <Route path='/' element={ <Home /> } />
