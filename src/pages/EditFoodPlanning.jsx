@@ -237,7 +237,7 @@ function EditFoodPlanning() {
           })}
         </Form.Select>
       </Form.Group>
-      <Button onClick={handleShow}> Save new Food Planning </Button>
+      <Button onClick={handleShow}> Save Changes </Button>
 
       <Modal show={show}>
     <Modal.Header>

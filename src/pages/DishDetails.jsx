@@ -93,7 +93,7 @@ function DishDetails() {
             <Button
               variant="light"
               as={Link}
-              to={`/edit-food-planning/${foodPlannigList.id}`}
+              to={`/edit-dish/${dish.id}`}
             >
               ✏️
             </Button>
