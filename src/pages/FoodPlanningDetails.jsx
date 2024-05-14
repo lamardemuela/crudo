@@ -11,9 +11,7 @@ function FoodPlanningDetails() {
   const navigate = useNavigate();
   const params = useParams();
   const [foodPlannigList, setFoodPlanningList] = useState(null);
-  let variablebreakfastDish;
-  let variableLunchDish;
-  let variableDinnerDish;
+
   const [breakfastDish, setBreakfastDish] = useState(null);
   const [lunchDish, setLunchDish] = useState(null);
   const [dinnerDish, setDinnerDish] = useState(null);
