@@ -7,12 +7,12 @@ function FoodPlanningCard(props) {
   const { id, title, description, image } = props.eachFoodPlanning;
 
   return (
-    <Card style={{ height: "18rem" }}>
+    <Card style={{ width: "14rem", height: "25rem" }}>
       <Card.Body
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
           gap: "8px",
         }}
       >
