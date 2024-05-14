@@ -7,17 +7,23 @@ function FoodPlanningCard(props) {
   const { id, title, description, image } = props.eachFoodPlanning;
 
   return (
-    // <div style={containerCardStyles}>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={image} />
-        <Card.Body>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>{description}</Card.Text>
-          <Link to={`/food-planning-details/${id}`}>
+    <Card style={{ height: "18rem" }}>
+      <Card.Body
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          gap: "8px",
+        }}
+      >
+        <Card.Img variant="top" src={image} height="120rem" />
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{description}</Card.Text>
+        <Link to={`/food-planning-details/${id}`}>
           <Button variant="primary">Details</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+        </Link>
+      </Card.Body>
+    </Card>
   );
 }
 

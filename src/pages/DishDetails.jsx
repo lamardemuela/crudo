@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import FoodPlanningCard from "../components/FoodPlanningCard";
 import Button from "react-bootstrap/Button";
 import { Spinner } from "react-bootstrap/esm";
@@ -87,9 +87,20 @@ function DishDetails() {
             style={{ borderRadius: "16px" }}
           />
           <div style={actionsStyles}>
-            <p>{dish.isFav ? "❤️" : "🩶"}</p>
-            <p>✏️</p>
-            <Button variant="primary">Preparation</Button>
+            <Button variant="light" >
+              {foodPlannigList.isFav ? "❤️" : "🩶"}
+            </Button>
+            <Button
+              variant="light"
+              as={Link}
+              to={`/edit-food-planning/${foodPlannigList.id}`}
+            >
+              ✏️
+            </Button>
+            <Button variant="light">
+              🗑
+            </Button>
+            <Button variant="light">Preparation</Button>
           </div>
 
           <h2>{dish.title}</h2>
@@ -103,19 +114,25 @@ function DishDetails() {
               </Badge>
             );
           })}
-
-          
         </div>
-        
       </div>
-      
+
       <h2>Food Plannings</h2>
       {foodPlannigList.map((eachFoodPlan) => {
         return (
-          <FoodPlanningCard
-            key={eachFoodPlan.id}
-            eachFoodPlanning={eachFoodPlan}
-          />
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "24px",
+            }}
+          >
+            <FoodPlanningCard
+              key={eachFoodPlan.id}
+              eachFoodPlanning={eachFoodPlan}
+            />
+          </div>
         );
       })}
     </>
