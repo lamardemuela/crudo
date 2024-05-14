@@ -8,7 +8,7 @@ function About() {
     <div>
       <h1>KNOW THE PROJECT</h1>
       <div style={{display:"flex",flexDirection:"column",gap:"32px", justifyContent:"center", alignItems:"center"}}>
-      <img variant="top" src={img} height={"200px"} width={"600px"}/>
+      <img src={img} height={"200px"} width={"600px"} alt="logoCRUDO"/>
         <h3>
           This project was created to know about use of REACT, states,
           json-server, APIs etc for IRONHACK April-2024 by Águeda and Asier.
@@ -38,7 +38,7 @@ function About() {
         <div>
           <Card style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D35AQEjOAPoM_zpMQ/profile-framedphoto-shrink_400_400/0/1714067500345?e=1716307200&v=beta&t=dN85eWrHHgnjy0nQML5iRTf9oydQGO9lnjHMSTgDCMg" />
+              <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D35AQEjOAPoM_zpMQ/profile-framedphoto-shrink_400_400/0/1714067500345?e=1716307200&v=beta&t=dN85eWrHHgnjy0nQML5iRTf9oydQGO9lnjHMSTgDCMg" alt="Águeda" />
               <Card.Title>Águeda Muela:</Card.Title>
               <Card.Text>
                 <p>
@@ -60,7 +60,7 @@ function About() {
         <div>
           <Card style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D03AQGOeuL4JV2SZA/profile-displayphoto-shrink_400_400/0/1715238086912?e=1721260800&v=beta&t=tGjLIgFA_CL3SqgjZOqyE8-OVT1w_luXcfdb355jEqQ" />
+              <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D03AQGOeuL4JV2SZA/profile-displayphoto-shrink_400_400/0/1715238086912?e=1721260800&v=beta&t=tGjLIgFA_CL3SqgjZOqyE8-OVT1w_luXcfdb355jEqQ" alt="Asier"/>
               <Card.Title>Asier Mimbrero:</Card.Title>
               <Card.Text>
                 <p>
