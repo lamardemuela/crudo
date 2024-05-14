@@ -16,7 +16,7 @@ function FoodPlanningDetails() {
   const [lunchDish, setLunchDish] = useState(null);
   const [dinnerDish, setDinnerDish] = useState(null);
   const [show, setShow] = useState(false);
-  const [isFav, setIsFav] = useState(false);
+  const [isFav, setIsFav] = useState();
 
   useEffect(() => {
     getFoodPlanningList();
@@ -28,8 +28,8 @@ function FoodPlanningDetails() {
         `${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${
           params.foodPlanningId
         }`
-      );
-
+      )
+      
       setFoodPlanningList(response.data);
       const response1 = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/dishes/${response.data.breakFastDishId}`
@@ -95,12 +95,13 @@ function FoodPlanningDetails() {
       })
   }
   const handleToggleFav = () => {
+    setIsFav(!isFav)
+    
     axios.patch(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${
       params.foodPlanningId}`,{"isFav":!foodPlannigList.isFav})
       .catch((error)=>{
         navigate("/error");
-      })
-    setIsFav(!isFav)
+      })    
   }
 
   return (

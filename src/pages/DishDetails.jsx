@@ -11,29 +11,28 @@ function DishDetails() {
   const params = useParams();
   const [dish, setDish] = useState(null);
   const [foodPlannigList, setFoodPlanningList] = useState(null);
+  const [isFav, setIsFav] = useState();
 
   useEffect(() => {
     getDishDetails();
     getFoodPlannings();
-  }, []);
+  }, [isFav]);
 
   const getDishDetails = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
       .then((response) => {
         setDish(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        ////console.log(error);
         navigate("/error");
       });
   };
 
   const getFoodPlannings = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`)
       .then((resp) => {
-        console.log(resp);
+        //console.log(resp);
         const filterPlanningList = resp.data.filter((eachFoodPlan) => {
           return (
             eachFoodPlan.breakFastDishId === params.dishId ||
@@ -44,13 +43,11 @@ function DishDetails() {
         setFoodPlanningList(filterPlanningList);
       })
       .catch((error) => {
-        console.log(error);
+      ////console.log(error)
         navigate("/error");
       });
   };
 
-  console.log(dish);
-  console.log(foodPlannigList);
   if (dish === "" || foodPlannigList === null) {
     return (
       <Spinner animation="border" role="status">
@@ -76,6 +73,15 @@ function DishDetails() {
     gap: "32px",
     margin: "16px",
   };
+
+  const handleToggleFav = () => {
+    setIsFav(!isFav)
+    
+    axios.patch(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`,{"isFav":!dish.isFav})
+      .catch((error)=>{
+        navigate("/error");
+      })    
+  }
   return (
     <>
       <div style={containerMenu}>
@@ -87,8 +93,8 @@ function DishDetails() {
             style={{ borderRadius: "16px" }}
           />
           <div style={actionsStyles}>
-            <Button variant="light" >
-              {foodPlannigList.isFav ? "❤️" : "🩶"}
+            <Button variant="light"  onClick={handleToggleFav}>
+              {dish.isFav ? "❤️" : "🩶"}
             </Button>
             <Button
               variant="light"
