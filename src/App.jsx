@@ -26,7 +26,7 @@ function App() {
         <Route path='/' element={ <Home /> } />
         <Route path='/food-planning-list' element={ <FoodPlanningList /> } />
         <Route path='/dishes-list' element={ <DishesList /> } />
-        <Route path='/edit-food-planning' element={ <EditFoodPlanning /> } />
+        <Route path='/edit-food-planning/:foodPlanningId' element={ <EditFoodPlanning /> } />
         <Route path='/edit-dish' element={ <EditDish /> } />
         <Route path='/add-food-planning' element={ <AddFoodPlanning /> } />
         <Route path='/add-dish' element={ <AddDish /> } />

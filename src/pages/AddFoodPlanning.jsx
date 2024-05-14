@@ -23,7 +23,7 @@ function AddFoodPlanning() {
   // cogemos el id de los dishes
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes`).then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       setDishesList(response.data);
     });
   }, []);
@@ -39,16 +39,16 @@ function AddFoodPlanning() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const tagsArr = []
+    if(glutenFree) tagsArr.push("gluten-free")
+    if(lactoseFree) tagsArr.push("lactose-free")
+    if(highProtein) tagsArr.push("high-protein")
+    if(lowCarb) tagsArr.push("low-carb")
     const newFoodPlanning = {
       image: imageUrl,
       title,
       description,
-      tags: [
-        glutenFree === true && "Gluten-Free",
-        lowCarb === true && "Low-Carb",
-        lactoseFree === true && "Lactose-Free",
-        highProtein === true && "High Protein",
-      ],
+      tags: tagsArr,
       breakFastDishId: breakfast,
       lunchDishId: lunch,
       dinnerDishId: dinner,

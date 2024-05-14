@@ -12,7 +12,7 @@ function FoodPlanning() {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`)
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setFoodPlannings(response.data);
       })
       .catch((error) => {
