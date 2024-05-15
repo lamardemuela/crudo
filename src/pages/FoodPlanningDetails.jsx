@@ -16,11 +16,11 @@ function FoodPlanningDetails() {
   const [lunchDish, setLunchDish] = useState(null);
   const [dinnerDish, setDinnerDish] = useState(null);
   const [show, setShow] = useState(false);
-  const [isFav, setIsFav] = useState();
+ 
 
   useEffect(() => {
     getFoodPlanningList();
-  }, [isFav]);
+  }, []);
 
   const getFoodPlanningList = async () => {
     try {
@@ -45,6 +45,7 @@ function FoodPlanningDetails() {
         `${import.meta.env.VITE_BACKEND_URL}/dishes/${response.data.dinnerDishId}`
       );
       setDinnerDish(response3.data);
+      
     } catch (error) {
       navigate("/error");
     }
@@ -95,13 +96,14 @@ function FoodPlanningDetails() {
       })
   }
   const handleToggleFav = () => {
-    setIsFav(!isFav)
-    
+    // setIsFav(!isFav)
+    setFoodPlanningList({...foodPlannigList, isFav: !foodPlannigList.isFav})
     axios.patch(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${
-      params.foodPlanningId}`,{"isFav":!foodPlannigList.isFav})
+      params.foodPlanningId}`,{"isFav": !foodPlannigList.isFav})
       .catch((error)=>{
         navigate("/error");
-      })    
+      })   
+      
   }
 
   return (

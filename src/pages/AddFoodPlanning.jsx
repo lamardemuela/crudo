@@ -52,6 +52,7 @@ function AddFoodPlanning() {
       breakFastDishId: breakfast,
       lunchDishId: lunch,
       dinnerDishId: dinner,
+      isFav: false
     };
     console.log(newFoodPlanning);
 

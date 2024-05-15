@@ -11,26 +11,29 @@ function DishDetails() {
   const params = useParams();
   const [dish, setDish] = useState(null);
   const [foodPlannigList, setFoodPlanningList] = useState(null);
-  const [isFav, setIsFav] = useState();
+  // const [isFav, setIsFav] = useState();
 
   useEffect(() => {
     getDishDetails();
     getFoodPlannings();
-  }, [isFav]);
+  }, []);
 
   const getDishDetails = () => {
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
       .then((response) => {
         setDish(response.data);
+        // setIsFav(response.data.isFav)
       })
       .catch((error) => {
-        ////console.log(error);
+
         navigate("/error");
       });
   };
 
   const getFoodPlannings = () => {
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`)
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`)
       .then((resp) => {
         //console.log(resp);
         const filterPlanningList = resp.data.filter((eachFoodPlan) => {
@@ -43,18 +46,30 @@ function DishDetails() {
         setFoodPlanningList(filterPlanningList);
       })
       .catch((error) => {
-      ////console.log(error)
+        ////console.log(error)
         navigate("/error");
       });
   };
 
-  if (dish === "" || foodPlannigList === null) {
+  if (dish === null || foodPlannigList === null) {
     return (
       <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     );
   }
+
+  const handleToggleFav = () => {
+    // setIsFav(!isFav);
+    setDish({...dish, isFav: !dish.isFav})
+    axios
+      .patch(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`, {
+        isFav: !dish.isFav,
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
+  };
 
   // styles
   const containerMenu = {
@@ -74,14 +89,6 @@ function DishDetails() {
     margin: "16px",
   };
 
-  const handleToggleFav = () => {
-    setIsFav(!isFav)
-    
-    axios.patch(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`,{"isFav":!dish.isFav})
-      .catch((error)=>{
-        navigate("/error");
-      })    
-  }
   return (
     <>
       <div style={containerMenu}>
@@ -93,20 +100,14 @@ function DishDetails() {
             style={{ borderRadius: "16px" }}
           />
           <div style={actionsStyles}>
-            <Button variant="light"  onClick={handleToggleFav}>
+            <Button variant="light" onClick={handleToggleFav}>
               {dish.isFav ? "❤️" : "🩶"}
             </Button>
-            <Button
-              variant="light"
-              as={Link}
-              to={`/edit-dish/${dish.id}`}
-            >
+            <Button variant="light" as={Link} to={`/edit-dish/${dish.id}`}>
               ✏️
             </Button>
-            <Button variant="light">
-              🗑
-            </Button>
-            <Button variant="light">Preparation</Button>
+            <Button variant="light">🗑</Button>
+            <Button as={Link} to={`/preparation/${dish.id}`} variant="light">Preparation</Button>
           </div>
 
           <h2>{dish.title}</h2>
@@ -127,6 +128,7 @@ function DishDetails() {
       {foodPlannigList.map((eachFoodPlan) => {
         return (
           <div
+            key={eachFoodPlan.id}
             style={{
               display: "flex",
               flexWrap: "wrap",
@@ -134,10 +136,7 @@ function DishDetails() {
               gap: "24px",
             }}
           >
-            <FoodPlanningCard
-              key={eachFoodPlan.id}
-              eachFoodPlanning={eachFoodPlan}
-            />
+            <FoodPlanningCard eachFoodPlanning={eachFoodPlan} />
           </div>
         );
       })}

@@ -4,9 +4,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Spinner } from "react-bootstrap/esm";
 import { useNavigate } from "react-router-dom";
+import InputGroup from "react-bootstrap/InputGroup";
 
 function AddDish() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // variables para la propiedad del nuevo Dish
   const [imageUrl, setImageUrl] = useState("");
@@ -16,34 +17,53 @@ function AddDish() {
   const [lowCarb, setLowCarb] = useState(false);
   const [lactoseFree, setLactoseFree] = useState(false);
   const [highProtein, setHighProtein] = useState(false);
+  const [singleStep, setSingleStep] = useState("")
+  const [steps, setSteps] = useState([])
+
+ 
 
   // event onSubmit
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     // las tags serán un array vacío al que se irán añadiendo tags según marque el usuario
-    const tagsArr = []
-    if(glutenFree) tagsArr.push("gluten-free")
-    if(lactoseFree) tagsArr.push("lactose-free")
-    if(highProtein) tagsArr.push("high-protein")
-    if(lowCarb) tagsArr.push("low-carb")
+    const tagsArr = [];
+    if (glutenFree) tagsArr.push("gluten-free");
+    if (lactoseFree) tagsArr.push("lactose-free");
+    if (highProtein) tagsArr.push("high-protein");
+    if (lowCarb) tagsArr.push("low-carb");
 
     // creamos un nuevo componente Dish
     const newDish = {
       image: imageUrl,
       title,
       description,
-      tags: tagsArr
+      tags: tagsArr,
+      isFav: false,
+      preparation: steps
     };
 
     // lo añadimos a nuestro backend, dentro de la lista dishes
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/dishes`, newDish)
-    .then(() => {
-      navigate("/dishes-list")
-    })
-    .catch((error) => {
-      navigate("/error")
-    })
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/dishes`, newDish)
+      .then(() => {
+        navigate("/dishes-list");
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
+  };
+
+  // event añadir pasos
+  const handleClickStep = (event) => {
+    event.preventDefault()
+    
+    
+    console.log(singleStep);
+    
+    setSteps([...steps, singleStep])
+    console.log(steps);
+
   }
 
   return (
@@ -86,6 +106,28 @@ function AddDish() {
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
+
+      {/* STEPS */}
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Preparation *</Form.Label>
+        <InputGroup className="mb-3">
+          <Form.Control
+            required
+            placeholder="At least, enter the first step to prepare your dish"
+            aria-describedby="basic-addon2"
+            // value
+            onChange={(e) => {setSingleStep(e.target.value)}}
+          />
+          <Button variant="outline-secondary" id="button-addon2" onClick={handleClickStep}>
+            Add Step
+          </Button>
+        </InputGroup>
+        {steps.map((eachStep, i) => {
+          return <p key={i}> {i+1}.  {eachStep} </p>
+        })}
+      </Form.Group>
+
+      {/* TAGS */}
       <Form.Group
         controlId="formFile"
         className="mb-3"
@@ -129,7 +171,7 @@ function AddDish() {
       </Form.Group>
       <Button type="submit"> Save new Dish </Button>
     </Form>
-  )
+  );
 }
 
-export default AddDish
+export default AddDish;
