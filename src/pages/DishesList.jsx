@@ -31,7 +31,7 @@ function DishesList() {
   return (
     <>
     <SearchDish setDishes={setDishes}/>
-    <h1> List of dishes: </h1>
+    <h1 style={{margin:"24px",padding:"24px"}}> List of dishes: </h1>
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       {dishes.map((eachDish) => {
           return <DishCard key={eachDish.id} dish={eachDish} />

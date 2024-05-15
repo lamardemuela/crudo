@@ -15,6 +15,7 @@ import FoodPlanningDetails from './pages/FoodPlanningDetails';
 import DishDetails from './pages/DishDetails';
 import MainNavbar from './components/MainNavbar';
 import Preparation from './pages/Preparation';
+import TestAdd from './pages/TestAdd';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='/dish-details/:dishId' element={ <DishDetails /> } />
         <Route path='/preparation/:dishId' element={ <Preparation /> } />
         <Route path='/about' element={ <About /> } />
+        <Route path='/test' element={ <TestAdd/> } />
         <Route path='*' element={ <NotFound /> } />
         <Route path='/error' element={ <Error /> } />
       </Routes>

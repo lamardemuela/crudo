@@ -24,7 +24,7 @@ function MainNavbar() {
               <Nav.Link as={Link} to="/about">About</Nav.Link>
               <Nav.Link as={Link} to="/food-planning-list">Food Plannings</Nav.Link>
               <Nav.Link as={Link} to="/dishes-list">Dishes</Nav.Link>
-              <NavDropdown title="Add a planning or dish" id="basic-nav-dropdown">
+              <NavDropdown title="Add new planning or dish" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="add-food-planning">
                   Add Food Planning
                 </NavDropdown.Item>
