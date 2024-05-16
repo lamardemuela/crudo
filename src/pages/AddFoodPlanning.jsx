@@ -2,12 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Modal from 'react-bootstrap/Modal';
+import Modal from "react-bootstrap/Modal";
 import { Spinner } from "react-bootstrap/esm";
 import { useNavigate } from "react-router-dom";
 
 function AddFoodPlanning() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -20,10 +20,10 @@ function AddFoodPlanning() {
   const [lunch, setLunch] = useState("");
   const [dinner, setDinner] = useState("");
   const [dishesList, setDishesList] = useState(null);
-  const [ whatDish, setWhatDish ] = useState("")
-  const [ bTitle, setbTitle ] = useState("")
-  const [ lTitle, setlTitle ] = useState("")
-  const [ dTitle, setdTitle ] = useState("")
+  const [whatDish, setWhatDish] = useState("");
+  const [bTitle, setbTitle] = useState("");
+  const [lTitle, setlTitle] = useState("");
+  const [dTitle, setdTitle] = useState("");
 
   // cogemos el id de los dishes
   useEffect(() => {
@@ -40,43 +40,43 @@ function AddFoodPlanning() {
       </Spinner>
     );
   }
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
   const handleBdish = () => {
-    setWhatDish("b")
-    setShow(true)
-  }
+    setWhatDish("b");
+    setShow(true);
+  };
   const handleLdish = () => {
-    setWhatDish("l")
-    setShow(true)
-  }
+    setWhatDish("l");
+    setShow(true);
+  };
   const handleDdish = () => {
-    setWhatDish("d")
-    setShow(true)
-  }
+    setWhatDish("d");
+    setShow(true);
+  };
   const handleCloseB = (eachDish) => {
-    setBreakfast(eachDish.id)
-    setbTitle(eachDish)
-    setShow(false)
-  }
+    setBreakfast(eachDish.id);
+    setbTitle(eachDish);
+    setShow(false);
+  };
   const handleCloseL = (eachDish) => {
-    setLunch(eachDish.id)
-    setlTitle(eachDish)
-    setShow(false)
-  }
+    setLunch(eachDish.id);
+    setlTitle(eachDish);
+    setShow(false);
+  };
   const handleCloseD = (eachDish) => {
-    setDinner(eachDish.id)
-    setdTitle(eachDish)
-    setShow(false)
-  }
+    setDinner(eachDish.id);
+    setdTitle(eachDish);
+    setShow(false);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const tagsArr = []
-    if(glutenFree) tagsArr.push("gluten-free")
-    if(lactoseFree) tagsArr.push("lactose-free")
-    if(highProtein) tagsArr.push("high-protein")
-    if(lowCarb) tagsArr.push("low-carb")
+    const tagsArr = [];
+    if (glutenFree) tagsArr.push("gluten-free");
+    if (lactoseFree) tagsArr.push("lactose-free");
+    if (highProtein) tagsArr.push("high-protein");
+    if (lowCarb) tagsArr.push("low-carb");
     const newFoodPlanning = {
       image: imageUrl,
       title,
@@ -85,17 +85,18 @@ function AddFoodPlanning() {
       breakFastDishId: breakfast,
       lunchDishId: lunch,
       dinnerDishId: dinner,
-      isFav: false
+      isFav: false,
     };
     //console.log(newFoodPlanning);
 
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`, newFoodPlanning)
-    .then(() => {
-      navigate("/food-planning-list")
-    })
-    .catch((error) => {
-      navigate("/error")
-    })
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`, newFoodPlanning)
+      .then(() => {
+        navigate("/food-planning-list");
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
   };
 
   // funciones para el onChange de cada tag
@@ -189,53 +190,94 @@ function AddFoodPlanning() {
         style={{ display: "flex", flexDirection: "column", gap: "16px" }}
       >
         <Button variant="light" onClick={handleBdish}>
-          Select your breakfast dish | Actual: {bTitle.title} - <img width={"40px"} height={"40px"} src={bTitle.image}/>
+          Select your breakfast dish | Actual: {bTitle.title} -{" "}
+          <img width={"40px"} height={"40px"} src={bTitle.image} />
         </Button>
         <Button variant="light" onClick={handleLdish}>
-          Select your lunch dish | Actual: {lTitle.title} - <img width={"40px"} height={"40px"} src={lTitle.image}/>
+          Select your lunch dish | Actual: {lTitle.title} -{" "}
+          <img width={"40px"} height={"40px"} src={lTitle.image} />
         </Button>
         <Button variant="light" onClick={handleDdish}>
-          Select your dinner dish | Actual: {dTitle.title} - <img width={"40px"} height={"40px"} src={dTitle.image}/>
+          Select your dinner dish | Actual: {dTitle.title} -{" "}
+          <img width={"40px"} height={"40px"} src={dTitle.image} />
         </Button>
       </Form.Group>
       <Button type="submit"> Save new Food Planning </Button>
 
       {/* MODAL */}
-      <Modal show={show}>
-        <Modal.Header>
-          <Modal.Title>Select dish for {whatDish==="b" ? "breakfast": whatDish==="l" ? "lunch":whatDish==="d" ? "dinner":null}
-          <Button variant="secondary" onClick={handleClose}>
-            Back
-          </Button>
-          </Modal.Title>
+      <Modal show={show} size="lg" fullscreen="sm-down" centered scrollable="true" onEscapeKeyDown={handleClose}>
+        <Modal.Header>          
+            <Modal.Title as="h3" class="modal-title">
+              Select dish for{" "}
+              {whatDish === "b"
+                ? "breakfast "
+                : whatDish === "l"
+                ? "lunch "
+                : whatDish === "d"
+                ? "dinner "
+                : null}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+            </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {whatDish==="b" ? dishesList.map((eachDish) => {
-            return (
-              <div style={{display:"flex",justifyContent:"center"}}>
-                  <Button variant="light" key={eachDish.id} onClick={()=>handleCloseB(eachDish)}>
-                  {eachDish.title} - 
-                  <img width={"50px"} height={"50px"} src={eachDish.image} />
-                  </Button> 
-              </div>
-                           
-            );
-          }): whatDish==="l" ? dishesList.map((eachDish) => {
-            return (
-                <Button variant="light" key={eachDish.id} onClick={()=>handleCloseL(eachDish)}>
-                  {eachDish.title} - 
-                  <img width={"50px"} height={"50px"} src={eachDish.image} />
-                  </Button>            
-            );
-          }):whatDish==="d" ? dishesList.map((eachDish) => {
-            return (
-                <Button variant="light" key={eachDish.id} onClick={()=>handleCloseD(eachDish)}>
-                  {eachDish.title} - 
-                  <img width={"50px"} height={"50px"} src={eachDish.image} />
-                  </Button>            
-            );
-          }):null}
-          
+          {whatDish === "b"
+            ? dishesList.map((eachDish) => {
+                return (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      variant="light"
+                      key={eachDish.id}
+                      onClick={() => handleCloseB(eachDish)}
+                    >
+                      {eachDish.title} -
+                      <img
+                        width={"50px"}
+                        height={"50px"}
+                        src={eachDish.image}
+                      />
+                    </Button>
+                  </div>
+                );
+              })
+            : whatDish === "l"
+            ? dishesList.map((eachDish) => {
+                return (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      variant="light"
+                      key={eachDish.id}
+                      onClick={() => handleCloseL(eachDish)}
+                    >
+                      {eachDish.title} -
+                      <img
+                        width={"50px"}
+                        height={"50px"}
+                        src={eachDish.image}
+                      />
+                    </Button>
+                  </div>
+                );
+              })
+            : whatDish === "d"
+            ? dishesList.map((eachDish) => {
+                return (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      variant="light"
+                      key={eachDish.id}
+                      onClick={() => handleCloseD(eachDish)}
+                    >
+                      {eachDish.title} -
+                      <img
+                        width={"50px"}
+                        height={"50px"}
+                        src={eachDish.image}
+                      />
+                    </Button>
+                  </div>
+                );
+              })
+            : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
