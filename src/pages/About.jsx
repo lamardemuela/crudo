@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import img from '../assets/images/logo-crudo.png'
+import logoLight from "../assets/images/logo-crudo.png";
+import logoDark from "../assets/images/crudo-white.png";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function About() {
+  
+  const {isDarkTheme} = useContext(ThemeContext)
   return (
-    <div className="about-project">
+    <div className={isDarkTheme?"about-project darkTheme":"about-project lightTheme"}>
       <h1>KNOW THE PROJECT</h1>
       <div className="about-child">
-      <img src={img} width={"200px"} alt="logoCRUDO" />
+      <img src={isDarkTheme?logoDark:logoLight} width={"200px"} alt="logoCRUDO" />
         <h3>
           This project was created to know about use of REACT, states,
           json-server, APIs etc for IRONHACK April-2024 by Águeda and Asier.
@@ -36,7 +41,8 @@ function About() {
       <h1>KNOW THE TEAM</h1>
         
         <div className="about-us">
-          <Card style={{ width: "18rem" }}>
+          <Card style={{ width: "18rem" }}
+              data-bs-theme={isDarkTheme?"dark":"light"}>
             <Card.Body>
               <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D03AQFxobxXqTz3zQ/profile-displayphoto-shrink_200_200/0/1714067499462?e=1721260800&v=beta&t=QvpLQ9y3FNf5C6cWFUc2ctKk_vlL16dNVVKIoap6rTU" alt="Águeda" />
               <Card.Title>Águeda Muela:</Card.Title>
@@ -58,7 +64,8 @@ function About() {
             </Card.Body>
           </Card>
         
-          <Card style={{ width: "18rem" }}>
+          <Card style={{ width: "18rem" }}
+              data-bs-theme={isDarkTheme?"dark":"light"}>
             <Card.Body>
               <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D03AQGOeuL4JV2SZA/profile-displayphoto-shrink_400_400/0/1715238086912?e=1721260800&v=beta&t=tGjLIgFA_CL3SqgjZOqyE8-OVT1w_luXcfdb355jEqQ" alt="Asier"/>
               <Card.Title>Asier Mimbrero:</Card.Title>

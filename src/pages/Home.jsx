@@ -6,11 +6,14 @@ import DishCard from "../components/DishCard";
 import Spinner from "react-bootstrap/Spinner";
 import hero from "../assets/images/hero-section.gif"
 import Button from 'react-bootstrap/Button';
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function Home() {
   const navigate = useNavigate()
   const [foodPlannings, setFoodPlannings] = useState(null);
-  const [dishes, setDishes] = useState(null);
+  const [dishes, setDishes] = useState(null);  
+  const {isDarkTheme} = useContext(ThemeContext)
 
   useEffect(() => {
     try {
@@ -38,10 +41,10 @@ function Home() {
   }
   return (
   <div className="hero-section-container">
-    <div className="hero-section">
-      <h5>Thanks to Crudo you can create or save your daily meal plans and individual dishes.</h5>
+    <div className={isDarkTheme?"hero-section darkTheme":"hero-section lightTheme"}>
+      <h5 style={{color:isDarkTheme?"black":"black"}}>Thanks to Crudo you can create or save your daily meal plans and individual dishes.</h5>
       <img src={hero} alt="hero section" width="260px" />
-      <p>Also, you can see how prepare a dish</p>
+      <p style={{color:isDarkTheme?"black":"black"}}>Also, you can see how prepare a dish</p>
       <Button as={Link} to="/preparation/NBTkyjJ" variant="primary"> See a preparation demo</Button>
     </div>
     <div>   

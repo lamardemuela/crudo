@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Spinner } from "react-bootstrap/esm";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function AddFoodPlanning() {
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ function AddFoodPlanning() {
   const [bTitle, setbTitle] = useState("");
   const [lTitle, setlTitle] = useState("");
   const [dTitle, setdTitle] = useState("");
+  const {isDarkTheme} = useContext(ThemeContext)
 
   // cogemos el id de los dishes
   useEffect(() => {
@@ -107,8 +110,9 @@ function AddFoodPlanning() {
 
   return (
     <Form
-      style={{
-        backgroundColor: "white",
+        data-bs-theme={isDarkTheme?"dark":"light"}
+        style={{
+        backgroundColor:  isDarkTheme?"#303030":"whitesmoke",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",

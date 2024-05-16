@@ -1,9 +1,17 @@
 #root {
   /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /*padding: 2rem;*/
   text-align: center;
+  /*background-color: #f3f3f3;*/
+}
+.darkTheme{
+  background-color: #303030;
+  color:#f3f3f3;
+}
+.lightTheme{
   background-color: #f3f3f3;
+  color:#303030;
 }
 
 .divContainer {
@@ -30,7 +38,6 @@
 }
 
 .about-project{
-  background-color: white;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -75,6 +82,15 @@
 
 /* MOBILE */
 @media (width < 760px) {
+  .darkTheme{
+    background-color: #303030;
+    color:#f3f3f3;
+  }
+  .lightTheme{
+    background-color: #f3f3f3;
+    color:#303030;
+  }
+  
   .divContainer {
     min-height: 70vh;
     padding: 8px;
@@ -112,7 +128,6 @@
 
   /* about page */
   .about-project{
-    background-color: white;
     border-radius: 16px;
     display: flex;
     flex-direction: column;

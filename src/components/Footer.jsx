@@ -4,18 +4,21 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../assets/images/logo-crudo.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function Footer() {
+  const {isDarkTheme,handleToggleTheme} = useContext(ThemeContext)
   const footerStyles = {
-    backgroundColor: "#f8f9fa",
     display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
+    justifyContent:"center",
+    alignItems: "center",
     height: "100px"
   }
   return (
-
-          <Nav className="me-auto" style={footerStyles}>
+      <Navbar bg={isDarkTheme?"dark":"light"} data-bs-theme={isDarkTheme?"dark":"light"} className="bg-body-tertiary">
+        <Container>
+          <Nav className="me-auto" style={footerStyles} >
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <NavDropdown title="Our Linkedin" id="basic-nav-dropdown">
@@ -31,6 +34,8 @@ function Footer() {
               <NavDropdown.Item as={Link} to="https://github.com/lamardemuela/crudo" target="_blank">Frontend Repository</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          </Container>
+        </Navbar>
   )
 }
 

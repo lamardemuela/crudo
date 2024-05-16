@@ -5,9 +5,12 @@ import Form from "react-bootstrap/Form";
 import { Spinner } from "react-bootstrap/esm";
 import { useNavigate } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function AddDish() {
   const navigate = useNavigate();
+  const {isDarkTheme} = useContext(ThemeContext)
 
   // variables para la propiedad del nuevo Dish
   const [imageUrl, setImageUrl] = useState("");
@@ -61,8 +64,9 @@ function AddDish() {
 
   return (
     <Form
-      style={{
-        backgroundColor: "white",
+        data-bs-theme={isDarkTheme?"dark":"light"}
+        style={{
+        backgroundColor: isDarkTheme?"#303030":"whitesmoke",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",

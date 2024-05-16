@@ -16,12 +16,16 @@ import DishDetails from './pages/DishDetails';
 import MainNavbar from './components/MainNavbar';
 import Preparation from './pages/Preparation';
 import TestAdd from './pages/TestAdd';
+import { ThemeContext } from "./context/theme.context";
+import { useContext } from 'react';
 
 function App() {
-
+  const {isDarkTheme} = useContext(ThemeContext)
   return (
-    <>
-    <MainNavbar />
+    <div className={isDarkTheme?"darkTheme":"lightTheme"}>
+      
+    <MainNavbar/>
+    
 
     <div className='divContainer'>
       <Routes>
@@ -43,7 +47,7 @@ function App() {
     </div>
 
     <Footer />
-    </>
+    </div>
   )
 }
 
