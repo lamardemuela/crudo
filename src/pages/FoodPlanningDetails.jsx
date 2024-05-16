@@ -6,6 +6,8 @@ import Badge from "react-bootstrap/Badge";
 import DishCard from "../components/DishCard";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function FoodPlanningDetails() {
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ function FoodPlanningDetails() {
   const [lunchDish, setLunchDish] = useState(null);
   const [dinnerDish, setDinnerDish] = useState(null);
   const [show, setShow] = useState(false);
+
+  const {isDarkTheme} = useContext(ThemeContext)
  
 
   useEffect(() => {
@@ -91,7 +95,7 @@ function FoodPlanningDetails() {
 
   return (
     <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
-      <div className="containerMenu">
+      <div className="containerMenu" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
         <div className="container-details">
           <img
             className="img-details"
@@ -100,10 +104,10 @@ function FoodPlanningDetails() {
             height="300px"
             style={{ borderRadius: "16px" }}
           />
-          <div className="actionsStyles">
-            <Button variant="light" onClick={handleToggleFav}>{foodPlannigList.isFav ? "❤️" : "🩶"}</Button>
-            <Button variant="light" as={Link} to={`/edit-food-planning/${foodPlannigList.id}`}>✏️</Button>
-            <Button variant="light" onClick={handleShow}>🗑</Button>
+          <div className="actionsStyles" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
+            <Button variant="light" onClick={handleToggleFav} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>{foodPlannigList.isFav ? "❤️" : "🩶"}</Button>
+            <Button variant="light" as={Link} to={`/edit-food-planning/${foodPlannigList.id}`} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>✏️</Button>
+            <Button variant="light" onClick={handleShow} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>🗑</Button>
           </div>
           <h2>{foodPlannigList.title}</h2>
           <p>{foodPlannigList.description}</p>

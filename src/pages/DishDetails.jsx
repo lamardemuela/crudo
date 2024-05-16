@@ -5,13 +5,17 @@ import FoodPlanningCard from "../components/FoodPlanningCard";
 import Button from "react-bootstrap/Button";
 import { Spinner } from "react-bootstrap/esm";
 import Badge from "react-bootstrap/Badge";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function DishDetails() {
   const navigate = useNavigate();
   const params = useParams();
   const [dish, setDish] = useState(null);
   const [foodPlannigList, setFoodPlanningList] = useState(null);
-  // const [isFav, setIsFav] = useState();
+ 
+
+  const {isDarkTheme} = useContext(ThemeContext)
 
   useEffect(() => {
     getDishDetails();
@@ -71,27 +75,10 @@ function DishDetails() {
       });
   };
 
-  // styles
-  // const containerMenu = {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   gap: "24px",
-  //   backgroundColor: "white",
-  //   padding: "16px",
-  //   borderRadius: "8px",
-  //   margin: "24px",
-  // };
-
-  // const actionsStyles = {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   gap: "32px",
-  //   margin: "16px",
-  // };
 
   return (
     <div  style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
-      <div className="containerMenu">
+      <div className="containerMenu" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
         <div className="container-details">
           <img
             className="img-details"
@@ -100,15 +87,15 @@ function DishDetails() {
             height="300px"
             style={{ borderRadius: "16px" }}
           />
-          <div className="actionsStyles">
-            <Button variant="light" onClick={handleToggleFav}>
+          <div className="actionsStyles" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
+            <Button variant="light" onClick={handleToggleFav} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
               {dish.isFav ? "❤️" : "🩶"}
             </Button>
-            <Button variant="light" as={Link} to={`/edit-dish/${dish.id}`}>
+            <Button variant="light" as={Link} to={`/edit-dish/${dish.id}`} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
               ✏️
             </Button>
-            <Button variant="light">🗑</Button>
-            <Button as={Link} to={`/preparation/${dish.id}`} variant="light">Preparation</Button>
+            <Button variant="light" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>🗑</Button>
+            <Button as={Link} to={`/preparation/${dish.id}`} variant="light" style={{backgroundColor:isDarkTheme?"#212529":"#fff", color:isDarkTheme?"#fff":"#212529"}}>Preparation</Button>
           </div>
 
           <h2>{dish.title}</h2>
