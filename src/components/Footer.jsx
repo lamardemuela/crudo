@@ -8,12 +8,13 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/theme.context";
 
 function Footer() {
-  const {isDarkTheme,handleToggleTheme} = useContext(ThemeContext)
+  const {isDarkTheme} = useContext(ThemeContext)
   const footerStyles = {
     display: "flex",
     justifyContent:"center",
     alignItems: "center",
-    height: "100px"
+    height: "100px",
+    width: "100%"
   }
   return (
       <Navbar bg={isDarkTheme?"dark":"light"} data-bs-theme={isDarkTheme?"dark":"light"} className="bg-body-tertiary">

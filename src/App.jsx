@@ -18,6 +18,7 @@ import Preparation from './pages/Preparation';
 import TestAdd from './pages/TestAdd';
 import { ThemeContext } from "./context/theme.context";
 import { useContext } from 'react';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const {isDarkTheme} = useContext(ThemeContext)
@@ -27,7 +28,7 @@ function App() {
     <MainNavbar/>
     
 
-    <div className='divContainer'>
+    <Container className='divContainer'>
       <Routes>
         <Route path='/' element={ <Home /> } />
         <Route path='/food-planning-list' element={ <FoodPlanningList /> } />
@@ -44,7 +45,8 @@ function App() {
         <Route path='*' element={ <NotFound /> } />
         <Route path='/error' element={ <Error /> } />
       </Routes>
-    </div>
+    </Container>
+
 
     <Footer />
     </div>

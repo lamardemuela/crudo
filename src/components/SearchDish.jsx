@@ -2,10 +2,14 @@ import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Form from "react-bootstrap/Form";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function SearchDish(props) {
   const [ searchTerm , setSearchTerm ] = useState('')
   const navigate = useNavigate()
+  const {isDarkTheme} = useContext(ThemeContext)
+
   useEffect(() => {       
     const delayDebounceFn = setTimeout(() => {  
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes?title_like=${searchTerm}`)
@@ -24,6 +28,7 @@ function SearchDish(props) {
   return (
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap" >
       <Form.Control
+          data-bs-theme={isDarkTheme?"dark":"light"}
           type="text"
           placeholder="Buscar plato...🔍"
           onChange={(e) => setSearchTerm(e.target.value)}

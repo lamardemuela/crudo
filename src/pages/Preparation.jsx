@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap/esm";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import animation from "../assets/images/preparation-anim.gif";
+import animation from "../assets/images/preparation.gif";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function Preparation() {
   const params = useParams();
   const navigate = useNavigate();
   const [steps, setStep] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
-  // const [ progressNum, setProgressNum ] = useState()
+  const {isDarkTheme} = useContext(ThemeContext)
 
   useEffect(() => {
     axios
@@ -40,9 +42,9 @@ function Preparation() {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    // alignItems:"center",
     gap: "24px",
-    backgroundColor: "white",
+    // backgroundColor: "white",
+    backgroundColor:isDarkTheme?"#212529":"#fff",
     padding: "28px",
     borderRadius: "8px",
     margin: "24px",
@@ -63,7 +65,7 @@ function Preparation() {
             max={100}
           />
           <div>
-            <img src={animation} alt="preparation" width="150px" />
+            <img src={animation} alt="preparation" width="200px" />
           </div>
           <h2>{steps[currentStep]}</h2>
           {currentStep === steps.length - 1 ? (

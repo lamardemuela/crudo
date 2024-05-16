@@ -40,15 +40,15 @@ function Home() {
     );
   }
   return (
-  <div className="hero-section-container">
-    <div className={isDarkTheme?"hero-section darkTheme":"hero-section lightTheme"}>
-      <h5 style={{color:isDarkTheme?"black":"black"}}>Thanks to Crudo you can create or save your daily meal plans and individual dishes.</h5>
-      <img src={hero} alt="hero section" width="260px" />
-      <p style={{color:isDarkTheme?"black":"black"}}>Also, you can see how prepare a dish</p>
+  <div className="hero-section-container" >
+    <div className={isDarkTheme?"hero-section darkTheme":"hero-section lightTheme"} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
+      <h5 style={{color:isDarkTheme?"#fff":"black"}}>Thanks to Crudo you can create or save your daily meal plans and individual dishes.</h5>
+      <img src={hero} alt="hero section" width="300px" />
+      <p style={{color:isDarkTheme?"#fff":"black"}}>Also, you can see how prepare a dish</p>
       <Button as={Link} to="/preparation/NBTkyjJ" variant="primary"> See a preparation demo</Button>
     </div>
     <div>   
-      <h1>Favourite Food Plannings:</h1>
+      <h1 style={{marginBottom: "24px"}}>Favourite Food Plannings:</h1>
       <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       {foodPlannings.map((eachFoodPlanning) => {
         return eachFoodPlanning.isFav&&<FoodPlanningCard key={eachFoodPlanning.id} eachFoodPlanning={eachFoodPlanning} />;
@@ -56,7 +56,7 @@ function Home() {
     </div>
     </div>
     <div>
-      <h1>Favourite Dishes:</h1>
+      <h1 style={{marginBottom: "24px"}}>Favourite Dishes:</h1>
       <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       {dishes.map((eachDish) => {
         return eachDish.isFav&&<DishCard key={eachDish.id} dish={eachDish} />
