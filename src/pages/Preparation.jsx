@@ -28,7 +28,7 @@ function Preparation() {
 
   if (steps === null) {
     <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
+      <span className="visually-hidden">...Loading...</span>
     </Spinner>;
   }
 
@@ -53,7 +53,7 @@ function Preparation() {
   return (
     <div>
       {steps === null || steps === undefined ? (
-        <p>this dish hasn't got a preparation</p>
+        <h3>This dish has no saved preparation steps</h3>
       ) : (
         <div style={containerPreparation}>
           <h5> Dish preparation steps </h5>

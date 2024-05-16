@@ -73,7 +73,7 @@ function About() {
                 <p>
                   <span style={{ fontWeight: "bold" }}>About me.</span>
                 </p>
-                <p>👋🏻 Soy Asier, vuelvo al mundo del desarrollo después de unos años en el mundo hostelero como barista profesional.</p>
+                <p>👋🏻 Soy Asier, después de unos años como barista profesional vuelvo al mundo del desarrollo web, que es mi verdadera pasión.</p>
               </Card.Text>
               <Link to="https://www.linkedin.com/in/asiermd/" target="_blank">
                 <h5>Linkedin </h5>
