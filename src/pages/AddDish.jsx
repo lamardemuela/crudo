@@ -43,7 +43,6 @@ function AddDish() {
       preparation: steps
     };
 
-    // lo añadimos a nuestro backend, dentro de la lista dishes
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/dishes`, newDish)
       .then(() => {
@@ -56,14 +55,8 @@ function AddDish() {
 
   // event añadir pasos
   const handleClickStep = (event) => {
-    event.preventDefault()
-    
-    
-    console.log(singleStep);
-    
+    event.preventDefault()    
     setSteps([...steps, singleStep])
-    console.log(steps);
-
   }
 
   return (

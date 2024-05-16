@@ -16,7 +16,7 @@ function Preparation() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
       .then((response) => {
         setStep(response.data.preparation);
-        console.log(response.data.preparation);
+        //console.log(response.data.preparation);
       })
       .catch((error) => {
         navigate("/error");

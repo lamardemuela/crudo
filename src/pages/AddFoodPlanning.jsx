@@ -2,12 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Modal from 'react-bootstrap/Modal';
 import { Spinner } from "react-bootstrap/esm";
 import { useNavigate } from "react-router-dom";
 
 function AddFoodPlanning() {
   const navigate = useNavigate()
-
+  const [show, setShow] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,6 +20,10 @@ function AddFoodPlanning() {
   const [lunch, setLunch] = useState("");
   const [dinner, setDinner] = useState("");
   const [dishesList, setDishesList] = useState(null);
+  const [ whatDish, setWhatDish ] = useState("")
+  const [ bTitle, setbTitle ] = useState("")
+  const [ lTitle, setlTitle ] = useState("")
+  const [ dTitle, setdTitle ] = useState("")
 
   // cogemos el id de los dishes
   useEffect(() => {
@@ -35,7 +40,35 @@ function AddFoodPlanning() {
       </Spinner>
     );
   }
-
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const handleBdish = () => {
+    setWhatDish("b")
+    setShow(true)
+  }
+  const handleLdish = () => {
+    setWhatDish("l")
+    setShow(true)
+  }
+  const handleDdish = () => {
+    setWhatDish("d")
+    setShow(true)
+  }
+  const handleCloseB = (eachDish) => {
+    setBreakfast(eachDish.id)
+    setbTitle(eachDish)
+    setShow(false)
+  }
+  const handleCloseL = (eachDish) => {
+    setLunch(eachDish.id)
+    setlTitle(eachDish)
+    setShow(false)
+  }
+  const handleCloseD = (eachDish) => {
+    setDinner(eachDish.id)
+    setdTitle(eachDish)
+    setShow(false)
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -54,7 +87,7 @@ function AddFoodPlanning() {
       dinnerDishId: dinner,
       isFav: false
     };
-    console.log(newFoodPlanning);
+    //console.log(newFoodPlanning);
 
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`, newFoodPlanning)
     .then(() => {
@@ -155,50 +188,61 @@ function AddFoodPlanning() {
       <Form.Group
         style={{ display: "flex", flexDirection: "column", gap: "16px" }}
       >
-        <Form.Select
-          aria-label="Default select example"
-          onChange={(e) => setBreakfast(e.target.value)}
-        >
-          <option>Select your breakfast dish</option>
-          <option value=""> None </option>
-          {dishesList.map((eachDish) => {
-            return (
-              <option key={eachDish.id} value={eachDish.id}>
-                {eachDish.title}
-              </option>
-            );
-          })}
-        </Form.Select>
-        <Form.Select
-          aria-label="Default select example"
-          onChange={(e) => setLunch(e.target.value)}
-        >
-          <option>Select your lunch dish</option>
-          <option value=""> None </option>
-          {dishesList.map((eachDish) => {
-            return (
-              <option key={eachDish.id} value={eachDish.id}>
-                {eachDish.title}
-              </option>
-            );
-          })}
-        </Form.Select>
-        <Form.Select
-          aria-label="Default select example"
-          onChange={(e) => setDinner(e.target.value)}
-        >
-          <option>Select your dinner dish</option>
-          <option value=""> None </option>
-          {dishesList.map((eachDish) => {
-            return (
-              <option key={eachDish.id} value={eachDish.id}>
-                {eachDish.title}
-              </option>
-            );
-          })}
-        </Form.Select>
+        <Button variant="light" onClick={handleBdish}>
+          Select your breakfast dish | Actual: {bTitle.title} - <img width={"40px"} height={"40px"} src={bTitle.image}/>
+        </Button>
+        <Button variant="light" onClick={handleLdish}>
+          Select your lunch dish | Actual: {lTitle.title} - <img width={"40px"} height={"40px"} src={lTitle.image}/>
+        </Button>
+        <Button variant="light" onClick={handleDdish}>
+          Select your dinner dish | Actual: {dTitle.title} - <img width={"40px"} height={"40px"} src={dTitle.image}/>
+        </Button>
       </Form.Group>
       <Button type="submit"> Save new Food Planning </Button>
+
+      {/* MODAL */}
+      <Modal show={show}>
+        <Modal.Header>
+          <Modal.Title>Select dish for {whatDish==="b" ? "breakfast": whatDish==="l" ? "lunch":whatDish==="d" ? "dinner":null}
+          <Button variant="secondary" onClick={handleClose}>
+            Back
+          </Button>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {whatDish==="b" ? dishesList.map((eachDish) => {
+            return (
+              <div style={{display:"flex",justifyContent:"center"}}>
+                  <Button variant="light" key={eachDish.id} onClick={()=>handleCloseB(eachDish)}>
+                  {eachDish.title} - 
+                  <img width={"50px"} height={"50px"} src={eachDish.image} />
+                  </Button> 
+              </div>
+                           
+            );
+          }): whatDish==="l" ? dishesList.map((eachDish) => {
+            return (
+                <Button variant="light" key={eachDish.id} onClick={()=>handleCloseL(eachDish)}>
+                  {eachDish.title} - 
+                  <img width={"50px"} height={"50px"} src={eachDish.image} />
+                  </Button>            
+            );
+          }):whatDish==="d" ? dishesList.map((eachDish) => {
+            return (
+                <Button variant="light" key={eachDish.id} onClick={()=>handleCloseD(eachDish)}>
+                  {eachDish.title} - 
+                  <img width={"50px"} height={"50px"} src={eachDish.image} />
+                  </Button>            
+            );
+          }):null}
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Back
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Form>
   );
 }
