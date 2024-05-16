@@ -15,7 +15,7 @@ function DishCard(props) {
           gap: "8px",
         }}
       >
-        <Card.Img variant="top" src={image} height="120rem" />
+        <Card.Img variant="top" src={image} height="120rem" style={{objectFit:"cover"}} />
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
         <Link to={`/dish-details/${id}`}>

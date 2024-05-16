@@ -4,10 +4,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../assets/images/logo-crudo.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function MainNavbar() {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleNavClose = () => setExpanded(false);
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" sticky="top">
+    <Navbar expanded={expanded} expand="lg" className="bg-body-tertiary" sticky="top">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -17,18 +21,19 @@ function MainNavbar() {
             alt="React Bootstrap logo"
           />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse iid="responsive-navbar-nav" className="flex-grow-0">
+        <Navbar.Toggle onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0">
           <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
-              <Nav.Link href="/food-planning-list">Food Plannings</Nav.Link>
-              <Nav.Link href="/dishes-list">Dishes</Nav.Link>
+              <Nav.Link  as={Link} to="/" onClick={handleNavClose}>Home</Nav.Link>
+              <Nav.Link  as={Link} to="/about" onClick={handleNavClose}>About</Nav.Link>
+              <Nav.Link  as={Link} to="/food-planning-list" onClick={handleNavClose}>Food Plannings</Nav.Link>
+              <Nav.Link  as={Link} to="/dishes-list" onClick={handleNavClose}>Dishes</Nav.Link>
               <NavDropdown title="Add new planning or dish" id="collapsible-nav-dropdown">
-                <NavDropdown.Item  href="/add-food-planning">
+                <NavDropdown.Item   as={Link} to="/add-food-planning" onClick={handleNavClose}>
                   Add Food Planning
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/add-dish">Add Dish</NavDropdown.Item>
+                <NavDropdown.Item  as={Link} to="/add-dish" onClick={handleNavClose}>Add Dish</NavDropdown.Item>
               </NavDropdown>
           </Nav>
         </Navbar.Collapse>

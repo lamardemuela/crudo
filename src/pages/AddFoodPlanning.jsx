@@ -191,90 +191,122 @@ function AddFoodPlanning() {
       >
         <Button variant="light" onClick={handleBdish}>
           Select your breakfast dish | Actual: {bTitle.title} -{" "}
-          <img width={"40px"} height={"40px"} src={bTitle.image} />
+          <img width={"40px"} height={"40px"} src={bTitle.image} style={{ borderRadius: "50%" }} />
         </Button>
         <Button variant="light" onClick={handleLdish}>
           Select your lunch dish | Actual: {lTitle.title} -{" "}
-          <img width={"40px"} height={"40px"} src={lTitle.image} />
+          <img width={"40px"} height={"40px"} src={lTitle.image} style={{ borderRadius: "50%" }} />
         </Button>
         <Button variant="light" onClick={handleDdish}>
           Select your dinner dish | Actual: {dTitle.title} -{" "}
-          <img width={"40px"} height={"40px"} src={dTitle.image} />
+          <img width={"40px"} height={"40px"} src={dTitle.image} style={{ borderRadius: "50%" }} />
         </Button>
       </Form.Group>
       <Button type="submit"> Save new Food Planning </Button>
 
       {/* MODAL */}
-      <Modal show={show} size="lg" fullscreen="sm-down" centered scrollable="true" onEscapeKeyDown={handleClose}>
-        <Modal.Header>          
-            <Modal.Title as="h3" class="modal-title">
-              Select dish for{" "}
-              {whatDish === "b"
-                ? "breakfast "
-                : whatDish === "l"
-                ? "lunch "
-                : whatDish === "d"
-                ? "dinner "
-                : null}
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
-            </Modal.Title>
+      <Modal
+        show={show}
+        size="lg"
+        fullscreen="sm-down"
+        centered
+        scrollable="true"
+        onEscapeKeyDown={handleClose}
+      >
+        <Modal.Header
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Modal.Title as="h3" class="modal-title">
+            Select dish for{" "}
+            {whatDish === "b"
+              ? "breakfast "
+              : whatDish === "l"
+              ? "lunch "
+              : whatDish === "d"
+              ? "dinner "
+              : null}
+          </Modal.Title>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            onClick={handleClose}
+          ></button>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+        >
           {whatDish === "b"
             ? dishesList.map((eachDish) => {
                 return (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Button
-                      variant="light"
-                      key={eachDish.id}
-                      onClick={() => handleCloseB(eachDish)}
-                    >
-                      {eachDish.title} -
-                      <img
-                        width={"50px"}
-                        height={"50px"}
-                        src={eachDish.image}
-                      />
-                    </Button>
-                  </div>
+                  <Button
+                    variant="light"
+                    key={eachDish.id}
+                    onClick={() => handleCloseB(eachDish)}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    {eachDish.title}
+                    <img
+                      width={"50px"}
+                      height={"50px"}
+                      src={eachDish.image}
+                      style={{ borderRadius: "50%" }}
+                    />
+                  </Button>
                 );
               })
             : whatDish === "l"
             ? dishesList.map((eachDish) => {
                 return (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Button
-                      variant="light"
-                      key={eachDish.id}
-                      onClick={() => handleCloseL(eachDish)}
-                    >
-                      {eachDish.title} -
-                      <img
-                        width={"50px"}
-                        height={"50px"}
-                        src={eachDish.image}
-                      />
-                    </Button>
-                  </div>
+                  <Button
+                    variant="light"
+                    key={eachDish.id}
+                    onClick={() => handleCloseL(eachDish)}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    {eachDish.title} -
+                    <img
+                      width={"50px"}
+                      height={"50px"}
+                      src={eachDish.image}
+                      style={{ borderRadius: "50%" }}
+                    />
+                  </Button>
                 );
               })
             : whatDish === "d"
             ? dishesList.map((eachDish) => {
                 return (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Button
-                      variant="light"
-                      key={eachDish.id}
-                      onClick={() => handleCloseD(eachDish)}
-                    >
-                      {eachDish.title} -
-                      <img
-                        width={"50px"}
-                        height={"50px"}
-                        src={eachDish.image}
-                      />
-                    </Button>
-                  </div>
+                  <Button
+                    variant="light"
+                    key={eachDish.id}
+                    onClick={() => handleCloseD(eachDish)}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    {eachDish.title} -
+                    <img
+                      width={"50px"}
+                      height={"50px"}
+                      src={eachDish.image}
+                      style={{ borderRadius: "50%" }}
+                    />
+                  </Button>
                 );
               })
             : null}

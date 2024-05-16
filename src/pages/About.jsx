@@ -5,10 +5,10 @@ import img from '../assets/images/logo-crudo.png'
 
 function About() {
   return (
-    <div>
+    <div className="about-project">
       <h1>KNOW THE PROJECT</h1>
-      <div style={{display:"flex",flexDirection:"column",gap:"32px", justifyContent:"center", alignItems:"center"}}>
-      <img src={img} height={"200px"} width={"600px"} alt="logoCRUDO"/>
+      <div className="about-child">
+      <img src={img} width={"200px"} alt="logoCRUDO" />
         <h3>
           This project was created to know about use of REACT, states,
           json-server, APIs etc for IRONHACK April-2024 by Águeda and Asier.
@@ -32,18 +32,19 @@ function About() {
           </Link>
         </p>
       </div>
+      <div className="about-child">
       <h1>KNOW THE TEAM</h1>
-      <div style={{display:"flex", justifyContent:"center"}}>
         
-        <div>
+        <div className="about-us">
           <Card style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D35AQEjOAPoM_zpMQ/profile-framedphoto-shrink_400_400/0/1714067500345?e=1716307200&v=beta&t=dN85eWrHHgnjy0nQML5iRTf9oydQGO9lnjHMSTgDCMg" alt="Águeda" />
+              <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D03AQFxobxXqTz3zQ/profile-displayphoto-shrink_200_200/0/1714067499462?e=1721260800&v=beta&t=QvpLQ9y3FNf5C6cWFUc2ctKk_vlL16dNVVKIoap6rTU" alt="Águeda" />
               <Card.Title>Águeda Muela:</Card.Title>
               <Card.Text>
                 <p>
                   <span style={{ fontWeight: "bold" }}>About me.</span>
                 </p>
+                <p>👋🏻 ¡Hola! Soy Águeda, una profesional apasionada con experiencia en UX/UI Design, ahora sumergiéndome en el desarrollo web</p>
               </Card.Text>
               <Link
                 to="https://www.linkedin.com/in/agueda-muela/"
@@ -56,8 +57,7 @@ function About() {
               </Link>
             </Card.Body>
           </Card>
-        </div>
-        <div>
+        
           <Card style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Img variant="top" src="https://media.licdn.com/dms/image/D4D03AQGOeuL4JV2SZA/profile-displayphoto-shrink_400_400/0/1715238086912?e=1721260800&v=beta&t=tGjLIgFA_CL3SqgjZOqyE8-OVT1w_luXcfdb355jEqQ" alt="Asier"/>
@@ -66,6 +66,7 @@ function About() {
                 <p>
                   <span style={{ fontWeight: "bold" }}>About me.</span>
                 </p>
+                <p>👋🏻 Soy Asier, vuelvo al mundo del desarrollo después de unos años en el mundo hostelero como barista profesional.</p>
               </Card.Text>
               <Link to="https://www.linkedin.com/in/asiermd/" target="_blank">
                 <h5>Linkedin </h5>

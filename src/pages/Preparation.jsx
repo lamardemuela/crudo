@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap/esm";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import animation from "../assets/images/preparation-anim.gif";
 
 function Preparation() {
   const params = useParams();
@@ -39,6 +40,7 @@ function Preparation() {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    // alignItems:"center",
     gap: "24px",
     backgroundColor: "white",
     padding: "28px",
@@ -52,14 +54,18 @@ function Preparation() {
         <p>this dish hasn't got a preparation</p>
       ) : (
         <div style={containerPreparation}>
-          <h2> Dish preparation steps </h2>
+          <h5> Dish preparation steps </h5>
           <ProgressBar
+            variant={currentStep === steps.length - 1 ? "success" : "warning"}
             animated
             now={((currentStep + 1) / steps.length) * 100}
             min={10}
             max={100}
           />
-          <p>{steps[currentStep]}</p>
+          <div>
+            <img src={animation} alt="preparation" width="150px" />
+          </div>
+          <h2>{steps[currentStep]}</h2>
           {currentStep === steps.length - 1 ? (
             <Button as={Link} to={`/dish-details/${params.dishId}`}>
               {" "}

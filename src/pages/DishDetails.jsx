@@ -72,34 +72,35 @@ function DishDetails() {
   };
 
   // styles
-  const containerMenu = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "24px",
-    backgroundColor: "white",
-    padding: "16px",
-    borderRadius: "8px",
-    margin: "24px",
-  };
+  // const containerMenu = {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   gap: "24px",
+  //   backgroundColor: "white",
+  //   padding: "16px",
+  //   borderRadius: "8px",
+  //   margin: "24px",
+  // };
 
-  const actionsStyles = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "32px",
-    margin: "16px",
-  };
+  // const actionsStyles = {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   gap: "32px",
+  //   margin: "16px",
+  // };
 
   return (
-    <>
-      <div style={containerMenu}>
-        <div>
+    <div  style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+      <div className="containerMenu">
+        <div className="container-details">
           <img
+            className="img-details"
             src={dish.image}
             alt={dish.title}
             height="300px"
             style={{ borderRadius: "16px" }}
           />
-          <div style={actionsStyles}>
+          <div className="actionsStyles">
             <Button variant="light" onClick={handleToggleFav}>
               {dish.isFav ? "❤️" : "🩶"}
             </Button>
@@ -140,7 +141,7 @@ function DishDetails() {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

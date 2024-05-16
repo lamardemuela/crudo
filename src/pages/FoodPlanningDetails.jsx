@@ -66,23 +66,6 @@ function FoodPlanningDetails() {
     );
   }
 
-  // styles
-  const containerMenu = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "24px",
-    backgroundColor: "white",
-    padding: "16px",
-    borderRadius: "8px",
-    margin: "24px",
-  };
-
-  const actionsStyles = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "32px",
-    margin: "16px",
-  };
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false);
 
@@ -107,16 +90,17 @@ function FoodPlanningDetails() {
   }
 
   return (
-    <>
-      <div style={containerMenu}>
-        <div>
+    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
+      <div className="containerMenu">
+        <div className="container-details">
           <img
+            className="img-details"
             src={foodPlannigList.image}
             alt={foodPlannigList.title}
             height="300px"
             style={{ borderRadius: "16px" }}
           />
-          <div style={actionsStyles}>
+          <div className="actionsStyles">
             <Button variant="light" onClick={handleToggleFav}>{foodPlannigList.isFav ? "❤️" : "🩶"}</Button>
             <Button variant="light" as={Link} to={`/edit-food-planning/${foodPlannigList.id}`}>✏️</Button>
             <Button variant="light" onClick={handleShow}>🗑</Button>
@@ -162,7 +146,7 @@ function FoodPlanningDetails() {
           </Button>
         </Modal.Footer>
       </Modal> 
-    </>
+    </div>
   );
 }
 

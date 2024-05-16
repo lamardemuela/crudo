@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FoodPlanningCard from "../components/FoodPlanningCard";
 import DishCard from "../components/DishCard";
 import Spinner from "react-bootstrap/Spinner";
+import hero from "../assets/images/hero-section.gif"
+import Button from 'react-bootstrap/Button';
 
 function Home() {
   const navigate = useNavigate()
@@ -35,9 +37,15 @@ function Home() {
     );
   }
   return (
-  <div>
+  <div className="hero-section-container">
+    <div className="hero-section">
+      <h5>Thanks to Crudo you can create or save your daily meal plans and individual dishes.</h5>
+      <img src={hero} alt="hero section" width="260px" />
+      <p>Also, you can see how prepare a dish</p>
+      <Button as={Link} to="/preparation/NBTkyjJ" variant="primary"> See a preparation demo</Button>
+    </div>
     <div>   
-      <h1>FAVORITE FOOD PLANNINGS:</h1>
+      <h1>Favourite Food Plannings:</h1>
       <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       {foodPlannings.map((eachFoodPlanning) => {
         return eachFoodPlanning.isFav&&<FoodPlanningCard key={eachFoodPlanning.id} eachFoodPlanning={eachFoodPlanning} />;
@@ -45,7 +53,7 @@ function Home() {
     </div>
     </div>
     <div>
-      <h1>FAVORITE DISHES:</h1>
+      <h1>Favourite Dishes:</h1>
       <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       {dishes.map((eachDish) => {
         return eachDish.isFav&&<DishCard key={eachDish.id} dish={eachDish} />
