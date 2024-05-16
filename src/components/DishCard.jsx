@@ -18,9 +18,10 @@ function DishCard(props) {
           flexDirection: "column",
           justifyContent: "space-between",
           gap: "8px",
+          overflowY:"scroll"
         }}
       >
-        <Card.Img variant="top" src={image} height="120rem" style={{objectFit:"cover"}} />
+        <Link to={`/dish-details/${id}`}><Card.Img variant="top" src={image} height="120rem" style={{objectFit:"cover"}} /></Link>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
         <Link to={`/dish-details/${id}`}>

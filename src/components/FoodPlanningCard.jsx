@@ -20,7 +20,7 @@ function FoodPlanningCard(props) {
           gap: "8px",
         }}
       >
-        <Card.Img variant="top" src={image} height="120rem" style={{objectFit:"cover"}}/>
+        <Link to={`/food-planning-details/${id}`}><Card.Img variant="top" src={image} height="120rem" style={{objectFit:"cover"}}/></Link>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
         <Link to={`/food-planning-details/${id}`}>
