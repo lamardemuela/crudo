@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { Spinner } from "react-bootstrap/esm";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function EditFoodPlanning() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const params = useParams();
   const [show, setShow] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -21,35 +23,38 @@ function EditFoodPlanning() {
   const [lunch, setLunch] = useState("");
   const [dinner, setDinner] = useState("");
   const [dishesList, setDishesList] = useState(null);
+  const { isDarkTheme } = useContext(ThemeContext);
 
-  // cogemos el id de los dishes
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes`)
-    .then((response) => {
-      setDishesList(response.data);
-    }).catch((error)=>{
-      navigate('/error')
-      //console.log(error)
-    })
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${
-      params.foodPlanningId}`)
-      .then((respuesta)=>{
-        //console.log(respuesta.data)
-        setImageUrl(respuesta.data.image)
-        setTitle(respuesta.data.title)
-        setDescription(respuesta.data.description)
-        setBreakfast(respuesta.data.breakFastDishId)
-        setLunch(respuesta.data.lunchDishId)
-        setDinner(respuesta.data.dinnerDishId)
-        setGlutenFree(respuesta.data.tags.includes("gluten-free"))
-        setLactoseFree(respuesta.data.tags.includes("lactose-free"))
-        setLowCarb(respuesta.data.tags.includes("low-carb"))
-        setHighProtein(respuesta.data.tags.includes("high-protein"))
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/dishes`)
+      .then((response) => {
+        setDishesList(response.data);
       })
-      .catch((error)=>{
-        navigate('/error')
-        //console.log(error)
+      .catch((error) => {
+        navigate("/error");
+      });
+    axios
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${
+          params.foodPlanningId
+        }`
+      )
+      .then((respuesta) => {
+        setImageUrl(respuesta.data.image);
+        setTitle(respuesta.data.title);
+        setDescription(respuesta.data.description);
+        setBreakfast(respuesta.data.breakFastDishId);
+        setLunch(respuesta.data.lunchDishId);
+        setDinner(respuesta.data.dinnerDishId);
+        setGlutenFree(respuesta.data.tags.includes("gluten-free"));
+        setLactoseFree(respuesta.data.tags.includes("lactose-free"));
+        setLowCarb(respuesta.data.tags.includes("low-carb"));
+        setHighProtein(respuesta.data.tags.includes("high-protein"));
       })
+      .catch((error) => {
+        navigate("/error");
+      });
   }, []);
 
   if (dishesList === null) {
@@ -60,16 +65,16 @@ function EditFoodPlanning() {
     );
   }
 
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const tagsArr = []
-    if(glutenFree) tagsArr.push("gluten-free")
-    if(lactoseFree) tagsArr.push("lactose-free")
-    if(highProtein) tagsArr.push("high-protein")
-    if(lowCarb) tagsArr.push("low-carb")
+    const tagsArr = [];
+    if (glutenFree) tagsArr.push("gluten-free");
+    if (lactoseFree) tagsArr.push("lactose-free");
+    if (highProtein) tagsArr.push("high-protein");
+    if (lowCarb) tagsArr.push("low-carb");
     const newFoodPlanning = {
       image: imageUrl,
       title,
@@ -80,13 +85,19 @@ function EditFoodPlanning() {
       dinnerDishId: dinner,
     };
 
-    axios.put(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${params.foodPlanningId}`, newFoodPlanning)
-    .then(() => {
-      navigate("/food-planning-list")
-    })
-    .catch((error) => {
-      navigate("/error")
-    })
+    axios
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}/foodPlanning/${
+          params.foodPlanningId
+        }`,
+        newFoodPlanning
+      )
+      .then(() => {
+        navigate("/food-planning-list");
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
   };
 
   // funciones para el onChange de cada tag
@@ -97,8 +108,9 @@ function EditFoodPlanning() {
 
   return (
     <Form
+      data-bs-theme={isDarkTheme ? "dark" : "light"}
       style={{
-        backgroundColor: "white",
+        backgroundColor: isDarkTheme ? "#212529" : "#fff",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",
@@ -186,11 +198,11 @@ function EditFoodPlanning() {
           aria-label="Default select example"
           onChange={(e) => setBreakfast(e.target.value)}
         >
-          <option value={breakfast}>{dishesList.map((eachDish) => {
-            return (
-              eachDish.id===breakfast&&eachDish.title
-            )
-          })}</option>
+          <option value={breakfast}>
+            {dishesList.map((eachDish) => {
+              return eachDish.id === breakfast && eachDish.title;
+            })}
+          </option>
 
           {dishesList.map((eachDish) => {
             return (
@@ -205,11 +217,11 @@ function EditFoodPlanning() {
           aria-label="Default select example"
           onChange={(e) => setLunch(e.target.value)}
         >
-          <option value={lunch}>{dishesList.map((eachDish) => {
-            return (
-              eachDish.id===lunch&&eachDish.title
-            )
-          })}</option>
+          <option value={lunch}>
+            {dishesList.map((eachDish) => {
+              return eachDish.id === lunch && eachDish.title;
+            })}
+          </option>
           {dishesList.map((eachDish) => {
             return (
               <option key={eachDish.id} value={eachDish.id}>
@@ -223,11 +235,11 @@ function EditFoodPlanning() {
           aria-label="Default select example"
           onChange={(e) => setDinner(e.target.value)}
         >
-          <option value={dinner}>{dishesList.map((eachDish) => {
-            return (
-              eachDish.id===dinner&&eachDish.title
-            )
-          })}</option>
+          <option value={dinner}>
+            {dishesList.map((eachDish) => {
+              return eachDish.id === dinner && eachDish.title;
+            })}
+          </option>
           {dishesList.map((eachDish) => {
             return (
               <option key={eachDish.id} value={eachDish.id}>
@@ -239,24 +251,26 @@ function EditFoodPlanning() {
       </Form.Group>
       <Button onClick={handleShow}> Save Changes </Button>
 
-      <Modal show={show}>
-    <Modal.Header>
-      <Modal.Title>Edit</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>Are you sure you want to edit this Food Planning?</Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
-        Back
-      </Button>
-      <Button variant="primary" onClick={handleSubmit}>
-        Edit
-      </Button>
-    </Modal.Footer>
-  </Modal> 
-
+      <Modal show={show} data-bs-theme={isDarkTheme ? "dark" : "light"}>
+        <Modal.Header>
+          <Modal.Title style={{ color: isDarkTheme ? "#fff" : "#212529" }}>
+            Edit
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ color: isDarkTheme ? "#fff" : "#212529" }}>
+          Are you sure you want to edit this Food Planning?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Back
+          </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Edit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Form>
-   
   );
 }
 
-export default EditFoodPlanning
+export default EditFoodPlanning;

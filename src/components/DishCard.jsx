@@ -18,6 +18,7 @@ function DishCard(props) {
           flexDirection: "column",
           justifyContent: "space-between",
           gap: "8px",
+          scrollbarWidth:"none",
           overflowY:"scroll"
         }}
       >

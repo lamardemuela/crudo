@@ -12,14 +12,13 @@ function Preparation() {
   const navigate = useNavigate();
   const [steps, setStep] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
-  const {isDarkTheme} = useContext(ThemeContext)
+  const { isDarkTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
       .then((response) => {
         setStep(response.data.preparation);
-        //console.log(response.data.preparation);
       })
       .catch((error) => {
         navigate("/error");
@@ -43,8 +42,7 @@ function Preparation() {
     flexDirection: "column",
     justifyContent: "center",
     gap: "24px",
-    // backgroundColor: "white",
-    backgroundColor:isDarkTheme?"#212529":"#fff",
+    backgroundColor: isDarkTheme ? "#212529" : "#fff",
     padding: "28px",
     borderRadius: "8px",
     margin: "24px",

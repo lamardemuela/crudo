@@ -26,12 +26,10 @@ function AddFoodPlanning() {
   const [bTitle, setbTitle] = useState("");
   const [lTitle, setlTitle] = useState("");
   const [dTitle, setdTitle] = useState("");
-  const {isDarkTheme} = useContext(ThemeContext)
+  const { isDarkTheme } = useContext(ThemeContext);
 
-  // cogemos el id de los dishes
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes`).then((response) => {
-      //console.log(response.data);
       setDishesList(response.data);
     });
   }, []);
@@ -90,7 +88,6 @@ function AddFoodPlanning() {
       dinnerDishId: dinner,
       isFav: false,
     };
-    //console.log(newFoodPlanning);
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`, newFoodPlanning)
@@ -110,9 +107,9 @@ function AddFoodPlanning() {
 
   return (
     <Form
-        data-bs-theme={isDarkTheme?"dark":"light"}
-        style={{
-        backgroundColor:  isDarkTheme?"#303030":"whitesmoke",
+      data-bs-theme={isDarkTheme ? "dark" : "light"}
+      style={{
+        backgroundColor: isDarkTheme ? "#303030" : "whitesmoke",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",
@@ -195,15 +192,30 @@ function AddFoodPlanning() {
       >
         <Button variant="light" onClick={handleBdish}>
           Select your breakfast dish | Actual: {bTitle.title} -{" "}
-          <img width={"40px"} height={"40px"} src={bTitle.image} style={{ borderRadius: "50%" }} />
+          <img
+            width={"40px"}
+            height={"40px"}
+            src={bTitle.image}
+            style={{ borderRadius: "50%" }}
+          />
         </Button>
         <Button variant="light" onClick={handleLdish}>
           Select your lunch dish | Actual: {lTitle.title} -{" "}
-          <img width={"40px"} height={"40px"} src={lTitle.image} style={{ borderRadius: "50%" }} />
+          <img
+            width={"40px"}
+            height={"40px"}
+            src={lTitle.image}
+            style={{ borderRadius: "50%" }}
+          />
         </Button>
         <Button variant="light" onClick={handleDdish}>
           Select your dinner dish | Actual: {dTitle.title} -{" "}
-          <img width={"40px"} height={"40px"} src={dTitle.image} style={{ borderRadius: "50%" }} />
+          <img
+            width={"40px"}
+            height={"40px"}
+            src={dTitle.image}
+            style={{ borderRadius: "50%" }}
+          />
         </Button>
       </Form.Group>
       <Button type="submit"> Save new Food Planning </Button>

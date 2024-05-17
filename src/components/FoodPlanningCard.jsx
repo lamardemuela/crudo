@@ -7,20 +7,31 @@ import { ThemeContext } from "../context/theme.context";
 function FoodPlanningCard(props) {
   // destructuring
   const { id, title, description, image } = props.eachFoodPlanning;
-  const {isDarkTheme} = useContext(ThemeContext)
+  const { isDarkTheme } = useContext(ThemeContext);
 
   return (
-    <Card style={{ width: "14rem", height: "25rem" }}
-      data-bs-theme={isDarkTheme?"dark":"light"}>
+    <Card
+      style={{ width: "14rem", height: "25rem" }}
+      data-bs-theme={isDarkTheme ? "dark" : "light"}
+    >
       <Card.Body
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           gap: "8px",
+          scrollbarWidth: "none",
+          overflowY: "scroll",
         }}
       >
-        <Link to={`/food-planning-details/${id}`}><Card.Img variant="top" src={image} height="120rem" style={{objectFit:"cover"}}/></Link>
+        <Link to={`/food-planning-details/${id}`}>
+          <Card.Img
+            variant="top"
+            src={image}
+            height="120rem"
+            style={{ objectFit: "cover" }}
+          />
+        </Link>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
         <Link to={`/food-planning-details/${id}`}>

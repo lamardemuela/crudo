@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function EditDish() {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ function EditDish() {
   const [lowCarb, setLowCarb] = useState(false);
   const [lactoseFree, setLactoseFree] = useState(false);
   const [highProtein, setHighProtein] = useState(false);
-
+  const {isDarkTheme} = useContext(ThemeContext)
   // estado para el modal
   const [show, setShow] = useState(false);
 
@@ -75,9 +77,10 @@ function EditDish() {
       });
   };
   return (
-    <Form
+    <Form 
+    data-bs-theme={isDarkTheme?"dark":"light"}
       style={{
-        backgroundColor: "white",
+        backgroundColor: isDarkTheme?"#212529":"#fff",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",
@@ -161,11 +164,11 @@ function EditDish() {
       <Button onClick={handleShow}> Save changes </Button>
 
       {/* MODAL */}
-      <Modal show={show}>
+      <Modal show={show} data-bs-theme={isDarkTheme?"dark":"light"}>
         <Modal.Header>
-          <Modal.Title>Edit</Modal.Title>
+          <Modal.Title  style={{color:isDarkTheme?"#fff":"#212529"}}>Edit</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body  style={{color:isDarkTheme?"#fff":"#212529"}}>
           Are you sure you want to edit this dish?
         </Modal.Body>
         <Modal.Footer>

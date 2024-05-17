@@ -14,10 +14,8 @@ function TestAdd() {
   const [tempId, setTempId] = useState();
   const [canAssignDish, setCanAssignDish] = useState();
 
-  // cogemos el id de los dishes
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/dishes`).then((response) => {
-      //console.log(response.data);
       setDishesList(response.data);
     });
   }, []);
@@ -29,15 +27,6 @@ function TestAdd() {
       </Spinner>
     );
   }
-/*
-  const handleStop = (e, data) => {
-    const elementBelow = document.elementFromPoint(data.x, data.y);
-    //console.log(`Dropping in element with id: ${elementBelow.id}`);
-    //console.log(elementBelow);//!DEVUELVE NULL CASI SIEMPRE Y DEJA DE FUNCIONAR
-  };
-*/
-
-  
 
   return (
     <div
@@ -84,7 +73,7 @@ function TestAdd() {
       >
         {dishesList.map((eachDish) => {
           return (
-            <Draggable key={eachDish.id} /*onStop={handleStop}*/>
+            <Draggable key={eachDish.id}>
               <div
                 style={{
                   userSelect: "none",

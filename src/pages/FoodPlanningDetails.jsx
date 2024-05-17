@@ -18,7 +18,6 @@ function FoodPlanningDetails() {
   const [lunchDish, setLunchDish] = useState(null);
   const [dinnerDish, setDinnerDish] = useState(null);
   const [show, setShow] = useState(false);
-
   const {isDarkTheme} = useContext(ThemeContext)
  
 
@@ -136,11 +135,11 @@ function FoodPlanningDetails() {
           <DishCard dish={dinnerDish} />
         </div>:""}        
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}  data-bs-theme={isDarkTheme?"dark":"light"}>
         <Modal.Header>
-          <Modal.Title>Delete {foodPlannigList.title}</Modal.Title>
+          <Modal.Title style={{color:isDarkTheme?"#fff":"#212529"}}>Delete {foodPlannigList.title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this Food Planning?</Modal.Body>
+        <Modal.Body style={{color:isDarkTheme?"#fff":"#212529"}}>Are you sure you want to delete this Food Planning?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Back

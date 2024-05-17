@@ -13,9 +13,7 @@ function DishDetails() {
   const params = useParams();
   const [dish, setDish] = useState(null);
   const [foodPlannigList, setFoodPlanningList] = useState(null);
- 
-
-  const {isDarkTheme} = useContext(ThemeContext)
+  const { isDarkTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     getDishDetails();
@@ -27,10 +25,8 @@ function DishDetails() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`)
       .then((response) => {
         setDish(response.data);
-        // setIsFav(response.data.isFav)
       })
       .catch((error) => {
-
         navigate("/error");
       });
   };
@@ -39,7 +35,6 @@ function DishDetails() {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/foodPlanning`)
       .then((resp) => {
-        //console.log(resp);
         const filterPlanningList = resp.data.filter((eachFoodPlan) => {
           return (
             eachFoodPlan.breakFastDishId === params.dishId ||
@@ -50,7 +45,6 @@ function DishDetails() {
         setFoodPlanningList(filterPlanningList);
       })
       .catch((error) => {
-        ////console.log(error)
         navigate("/error");
       });
   };
@@ -64,8 +58,7 @@ function DishDetails() {
   }
 
   const handleToggleFav = () => {
-    // setIsFav(!isFav);
-    setDish({...dish, isFav: !dish.isFav})
+    setDish({ ...dish, isFav: !dish.isFav });
     axios
       .patch(`${import.meta.env.VITE_BACKEND_URL}/dishes/${params.dishId}`, {
         isFav: !dish.isFav,
@@ -75,10 +68,19 @@ function DishDetails() {
       });
   };
 
-
   return (
-    <div  style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
-      <div className="containerMenu" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="containerMenu"
+        style={{ backgroundColor: isDarkTheme ? "#212529" : "#fff" }}
+      >
         <div className="container-details">
           <img
             className="img-details"
@@ -87,20 +89,40 @@ function DishDetails() {
             height="300px"
             style={{ borderRadius: "16px" }}
           />
-          <div className="actionsStyles" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
-            <Button variant="light" onClick={handleToggleFav} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
+          <div
+            className="actionsStyles"
+            style={{ backgroundColor: isDarkTheme ? "#212529" : "#fff" }}
+          >
+            <Button
+              variant="light"
+              onClick={handleToggleFav}
+              style={{ backgroundColor: isDarkTheme ? "#212529" : "#fff" }}
+            >
               {dish.isFav ? "❤️" : "🩶"}
             </Button>
-            <Button variant="light" as={Link} to={`/edit-dish/${dish.id}`} style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>
+            <Button
+              variant="light"
+              as={Link}
+              to={`/edit-dish/${dish.id}`}
+              style={{ backgroundColor: isDarkTheme ? "#212529" : "#fff" }}
+            >
               ✏️
             </Button>
-            <Button variant="light" style={{backgroundColor:isDarkTheme?"#212529":"#fff"}}>🗑</Button>
-            <Button as={Link} to={`/preparation/${dish.id}`} variant="light" style={{backgroundColor:isDarkTheme?"#212529":"#fff", color:isDarkTheme?"#fff":"#212529"}}>Preparation</Button>
+            <Button
+              as={Link}
+              to={`/preparation/${dish.id}`}
+              variant="light"
+              style={{
+                backgroundColor: isDarkTheme ? "#212529" : "#fff",
+                color: isDarkTheme ? "#fff" : "#212529",
+              }}
+            >
+              Preparation
+            </Button>
           </div>
 
           <h2>{dish.title}</h2>
           <p>{dish.description}</p>
-          {/* <h4>{dish.tags}</h4> */}
 
           {dish.tags.map((eachTag, i) => {
             return (
